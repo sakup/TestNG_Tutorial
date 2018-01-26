@@ -11,7 +11,6 @@ public class TestNG_Annotation {
         SomeClassToTest obj = new SomeClassToTest();
         int result = obj.sumNumbers(1,2);
         System.out.println("Running test -> testMethod1");
-
     }
 
     @Test
