@@ -1,9 +1,10 @@
 package testcases;
 
-import org.testng.annotations.Test;
 import appcode.SomeClassToTest;
+import org.testng.annotations.Test;
 
-public class TestAnnotation {
+
+public class TestNG_Annotation {
 
     @Test
     public void testMethod1() {
