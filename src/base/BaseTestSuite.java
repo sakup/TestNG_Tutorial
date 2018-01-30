@@ -15,6 +15,16 @@ public class BaseTestSuite {
         System.out.println("BaseTestSuite ->  after class");
     }
 
+    @BeforeTest
+    public void beforeTest(){
+        System.out.println("BaseTestSuite ->  before test");
+    }
+
+    @AfterTest
+    public void afterTest(){
+        System.out.println("BaseTestSuite ->  after test");
+    }
+
     @BeforeSuite
     public void beforeSuite(){
         System.out.println("BaseTestSuite ->  before suite");
