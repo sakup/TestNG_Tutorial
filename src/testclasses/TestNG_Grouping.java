@@ -1,4 +1,4 @@
-package testcases;
+package testclasses;
 
 
 import org.testng.annotations.AfterClass;

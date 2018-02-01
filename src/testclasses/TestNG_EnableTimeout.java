@@ -1,6 +1,5 @@
-package testcases;
+package testclasses;
 
-import appcode.SomeClassToTest;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;

@@ -1,4 +1,4 @@
-package testcases;
+package testclasses;
 
 import base.BaseTestSuite;
 import org.testng.annotations.*;

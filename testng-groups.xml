@@ -17,7 +17,7 @@
         </run>
     </groups>
     <classes>
-        <class name = "testcases.TestNG_Grouping"></class>
+        <class name = "testclasses.TestNG_Grouping"></class>
     </classes>
 </test>
 </suite>
