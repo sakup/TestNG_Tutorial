@@ -1,23 +1,23 @@
-package testclasses;
+package extentreports;
 
 
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
+import extentreports.ExtentFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
-public class SeleniumLoginTest {
+public class Test1 {
 
     WebDriver driver;
     String baseUrl;
@@ -26,14 +26,13 @@ public class SeleniumLoginTest {
 
     @BeforeClass
     public void beforeClass() {
-        report = new ExtentReports("./loginTest.html");
+        report = ExtentFactory.getnstance();
         test = report.startTest("Verify Welcome Text");
         driver = new FirefoxDriver();
         baseUrl = "https://letskodeit.com/";
-        test.log(LogStatus.INFO, "Browser Started...");
-
+        test.log(LogStatus.INFO, "Browser Started");
         driver.manage().window().maximize();
-        test.log(LogStatus.INFO, "Browser Maximized...");
+        test.log(LogStatus.INFO, "Browser Maximized");
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get(baseUrl);
         test.log(LogStatus.INFO, "Web application open");
@@ -43,7 +42,7 @@ public class SeleniumLoginTest {
     public void test1_validLoginTest() throws Exception {
         WebElement singupLink = driver.findElement(By.id("comp-iiqg1vggactionTitle"));
         singupLink.click();
-        test.log(LogStatus.INFO, "Clicked on sigup link");
+        test.log(LogStatus.INFO, "Clicked on sigup link.");
 
         WebElement loginLink = driver.findElement(By.id("signUpDialogswitchDialogLink"));
         loginLink.click();

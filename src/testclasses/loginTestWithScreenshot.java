@@ -9,15 +9,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import utilities.Screenshots;
+
+import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
-public class SeleniumLoginTest {
+public class loginTestWithScreenshot {
 
     WebDriver driver;
     String baseUrl;
@@ -26,7 +29,7 @@ public class SeleniumLoginTest {
 
     @BeforeClass
     public void beforeClass() {
-        report = new ExtentReports("./loginTest.html");
+        report = new ExtentReports("./reports/loginTest.html");
         test = report.startTest("Verify Welcome Text");
         driver = new FirefoxDriver();
         baseUrl = "https://letskodeit.com/";
@@ -43,23 +46,23 @@ public class SeleniumLoginTest {
     public void test1_validLoginTest() throws Exception {
         WebElement singupLink = driver.findElement(By.id("comp-iiqg1vggactionTitle"));
         singupLink.click();
-        test.log(LogStatus.INFO, "Clicked on sigup link");
+        test.log(LogStatus.INFO, "Clicked on sigup link...");
 
         WebElement loginLink = driver.findElement(By.id("signUpDialogswitchDialogLink"));
         loginLink.click();
-        test.log(LogStatus.INFO, "Clicked on login link");
+        test.log(LogStatus.INFO, "Clicked on login link...");
 
         WebElement emailField = driver.findElement(By.id("memberLoginDialogemailInputinput"));
-        emailField.sendKeys("test@mail.com");
-        test.log(LogStatus.INFO, "Entered email");
+        emailField.sendKeys("tes4t@mail.com");
+        test.log(LogStatus.INFO, "Entered email...");
 
         WebElement passwordField = driver.findElement(By.id("memberLoginDialogpasswordInputinput"));
         passwordField.sendKeys("abcabc");
-        test.log(LogStatus.INFO, "Entered password");
+        test.log(LogStatus.INFO, "Entered password...");
 
         WebElement goButton = driver.findElement(By.id("memberLoginDialogokButton"));
         goButton.click();
-        test.log(LogStatus.INFO, "Clicked GO Button");
+        test.log(LogStatus.INFO, "Clicked GO Button...");
 
         Thread.sleep(3000);
 
@@ -67,7 +70,7 @@ public class SeleniumLoginTest {
         WebElement welcomeText = null;
 
         try {
-            welcomeText = driver.findElement(By.id("comp-iiqg1vggmemberTitle"));
+            welcomeText = driver.findElement(By.xpath("//div[text()='Hello test@email.com']"));
         }
         catch (NoSuchElementException e) {
             System.out.println(e.getMessage());
@@ -76,8 +79,14 @@ public class SeleniumLoginTest {
         test.log(LogStatus.PASS, "Verified Welcome Text");
     }
 
-    @AfterClass
-    public void afterClass() {
+    @AfterMethod
+        public void tearDown(ITestResult testResult) throws IOException {
+        if (testResult.getStatus() == ITestResult.FAILURE) {
+            String path = Screenshots.tekeScreenshot(driver,testResult.getName());
+            String imagePath = test.addScreenCapture(path);
+            test.log(LogStatus.FAIL, "Verify Welcome text Failed", imagePath);
+        }
+
         driver.quit();
         report.endTest(test);
         report.flush();
