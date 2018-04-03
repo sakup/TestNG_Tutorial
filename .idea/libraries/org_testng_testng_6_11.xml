@@ -8,7 +8,7 @@
       <root url="jar://$PROJECT_DIR$/lib/guice-4.1.0.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/javax.inject-1.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/aopalliance-1.0.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/guava-19.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/guava-23.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
