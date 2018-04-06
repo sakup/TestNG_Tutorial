@@ -4,6 +4,9 @@ package utilities;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Cell;
+
 
 import java.io.FileInputStream;
 
@@ -13,7 +16,7 @@ public class ExcelUtility {
     private static XSSFSheet ExcelWSheet;
 
     public static void setExcelFile(String path, String sheetName) throws Exception {
-        try{
+        try {
             // Open the Excel file
             FileInputStream ExcelFile = new FileInputStream(path);
 
@@ -25,35 +28,35 @@ public class ExcelUtility {
         }
     }
 
-    public static String[][] getTestData(String tebleName) {
+    public static String[][] getTestData(String tableName) {
         String[][] testData = null;
 
         try {
-            XSSFCell[] boumdaryCells = findCells(tableName);
+            XSSFCell[] boundaryCells = findCells(tableName);
             XSSFCell startCell = boundaryCells[0];
 
-            XSSFCell endCell = boumdaryCells[1];
+            XSSFCell endCell = boundaryCells[1];
 
             int startRow = startCell.getRowIndex() + 1;
             int endRow = endCell.getRowIndex() - 1;
             int startColl = startCell.getColumnIndex() + 1;
             int endColl = endCell.getColumnIndex() - 1;
 
-            testData = new String[endRow - startRow +1][endColl - startColl +1];
+            testData = new String[endRow - startRow + 1][endColl - startColl + 1];
 
-            for (int i = startRow; i < endRow+1; i++) {
-                for (int j = startColl; i < endColl+1; j++) {
-                    testData[i-startRow][j-startColl] = ExcelWSheet.getRow(i).getCell(j).getStringCellValue();
+            for (int i = startRow; i < endRow + 1; i++) {
+                for (int j = startColl; i < endColl + 1; j++) {
+                    testData[i - startRow][j - startColl] = ExcelWSheet.getRow(i).getCell(j).getStringCellValue();
                 }
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return testData
+        return testData;
     }
 
-    public static void XSSFCell[] findCells(String tableName) {
+    public static XSSFCell[] findCells(String tableName) {
         String pos = "begin";
         XSSFCell[] cells = new XSSFCell[2];
 
@@ -70,4 +73,5 @@ public class ExcelUtility {
             }
         }
         return cells;
+    }
 }
